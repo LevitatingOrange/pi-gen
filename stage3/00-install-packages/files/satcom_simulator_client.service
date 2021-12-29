@@ -1,0 +1,26 @@
+# container-satcom_simulator/client.service
+# based off of podman-create-systemd
+
+[Unit]
+Description=Client service for the satcom simulator
+#Documentation=man:podman-generate-systemd(1)
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/var/run/container/storage
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=always
+RestartSec=30
+
+ExecStartPre=/bin/rm -f %t/%n-pid %t/%n-cid
+ExecStart=/usr/bin/podman run --authfile "%h/.podman.auth.json" --pull always --conmon-pidfile %t/%n-pid --cidfile %t/%n-cid --cgroups=no-conmon --env-file %h/.satcom_simulator_client.env -v /run/podman/podman.sock:/run/podman/podman.sock -v faketime:/tmp/faketime -d -dit celestifier.space/library/satcom-simulator/client:latest client
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n-cid -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n-cid
+PIDFile=%t/%n-pid
+KillMode=none
+Type=forking
+
+[Install]
+WantedBy=default.target
+
