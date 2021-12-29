@@ -11,6 +11,7 @@ install -v -o 1000 -g 1000 -m 600 "secrets/.podman.auth.json" "${ROOTFS_DIR}/hom
 # TODO make this workk
 on_chroot << EOF
   sudo systemctl enable allow_user_podman_api.service
+  systemctl --user enable satcom_simulator_client.service
   sudo usermod -aG spi ${FIRST_USER_NAME}
   sudo usermod -aG i2c ${FIRST_USER_NAME}
   sudo usermod -aG gpio ${FIRST_USER_NAME} 
