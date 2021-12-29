@@ -1,0 +1,10 @@
+[Unit]
+ Description=QEMU ACL Hack
+ Requires=local-fs.target
+ After=local-fs.target podman.socket
+
+[Service]
+ ExecStart=/usr/bin/setfacl --modify u:1000:rw /run/podman/podman.sock
+
+[Install]
+ WantedBy=multi-user.target
