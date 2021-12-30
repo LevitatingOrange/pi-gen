@@ -1,10 +1,11 @@
 [Unit]
- Description=QEMU ACL Hack
+ Description=Allow podman access and lingering for user
  Requires=local-fs.target
  After=local-fs.target podman.socket
 
 [Service]
- ExecStart=/usr/bin/setfacl --modify u:1000:rw /run/podman/podman.sock && loginctl enable-linger 1000
+ ExecStart=/usr/bin/setfacl --modify u:1000:rw /run/podman/podman.sock
+ ExecStartPost=loginctl enable-linger 1000
 
 [Install]
  WantedBy=multi-user.target
