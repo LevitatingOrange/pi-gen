@@ -9,14 +9,14 @@ install -v -o 1000 -g 1000 -m 600 "secrets/.podman.auth.json" "${ROOTFS_DIR}/hom
 
 # TODO set hostname based on uuid or smth
 # TODO make this workk
-on_chroot << EOF
-  sudo systemctl enable allow_user_podman_api.service
-  systemctl --user enable satcom_simulator_client.service
-  sudo usermod -aG spi ${FIRST_USER_NAME}
-  sudo usermod -aG i2c ${FIRST_USER_NAME}
-  sudo usermod -aG gpio ${FIRST_USER_NAME} 
-  sudo loginctl enable-linger ${FIRST_USER_NAME}
-EOF
+# on_chroot << EOF
+#   sudo systemctl enable allow_user_podman_api.service
+#   su ${FIRST_USER_NAME} -c "systemctl --user enable satcom_simulator_client.service"
+#   sudo usermod -aG spi ${FIRST_USER_NAME}
+#   sudo usermod -aG i2c ${FIRST_USER_NAME}
+#   sudo usermod -aG gpio ${FIRST_USER_NAME} 
+#   sudo loginctl enable-linger ${FIRST_USER_NAME}
+# EOF
 #   sudo setfacl --modify user:$FIRST_USER_NAME:rw /run/podman/podman.sock
 # sudo usermod -aG spi levo
 # sudo usermod -aG i2c levo
