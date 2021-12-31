@@ -4,8 +4,7 @@
  After=local-fs.target podman.socket
 
 [Service]
- ExecStart=/usr/bin/setfacl --modify u:1000:rw /run/podman/podman.sock
- ExecStartPost=loginctl enable-linger 1000
+ ExecStart=loginctl enable-linger 1000
 
 [Install]
  WantedBy=multi-user.target
