@@ -4,7 +4,7 @@ install -v -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.config"
 install -v -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.config/systemd/"
 install -v -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.config/systemd/user/"
 install -v -o 1000 -g 1000 -m 644 "files/satcom_simulator_client.service" "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.config/systemd/user/satcom_simulator_client.service"
-install -v -m 644 "files/allow_user_podman_api.service" "${ROOTFS_DIR}/etc/systemd/system/allow_user_podman_api.service"
+#install -v -m 644 "files/allow_user_podman_api.service" "${ROOTFS_DIR}/etc/systemd/system/allow_user_podman_api.service"
 install -v -o 1000 -g 1000 -m 600 "secrets/.podman.auth.json" "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.podman.auth.json"
 
 # TODO set hostname based on uuid or smth
