@@ -14,7 +14,7 @@ Restart=always
 RestartSec=30
 
 ExecStartPre=/bin/rm -f %t/%n-pid %t/%n-cid
-ExecStart=/usr/bin/podman run --authfile "%h/.podman.auth.json" --pull always --conmon-pidfile %t/%n-pid --cidfile %t/%n-cid --cgroups=no-conmon --env-file %h/.satcom_simulator_client.env -v /run/podman/podman.sock:/run/podman/podman.sock -v faketime:/tmp/faketime -d -dit celestifier.space/library/satcom-simulator/client:latest client
+ExecStart=/usr/bin/podman run --authfile "%h/.podman.auth.json" --pull always --conmon-pidfile %t/%n-pid --cidfile %t/%n-cid --cgroups=no-conmon --env-file %h/.satcom_simulator_client.env -v /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock -v faketime:/tmp/faketime -d -dit celestifier.space/library/satcom-simulator/client:latest client
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n-cid -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n-cid
 PIDFile=%t/%n-pid
